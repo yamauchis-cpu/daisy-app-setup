@@ -176,7 +176,7 @@
   <footer>
     <div class="help">
       <b>困ったときは</b><br>
-      インストールやログインがうまくいかないときは、管理者または事務員に声をかけてください。IDやパスワードは別途お知らせします。
+      インストールがうまくいかないときは、管理者または事務員に声をかけてください。IDやパスワードは別途お知らせします。
     </div>
     <div>訪問看護ステーション デイジー｜<span id="updated"></span> 更新</div>
     <button class="reset" id="reset" type="button">チェックをすべて外す</button>
@@ -197,7 +197,7 @@
 /* =========================================================
    ▼ 管理者が編集するのはここだけです ▼
    ・アプリの追加/削除 … APPS に1行（1ブロック）追加・削除
-   ・カテゴリの変更 … 各アプリの cat を "must" / "asneeded" / "benefit" に
+   ・カテゴリの変更 … 各アプリの cat を "must"（必須）/ "asneeded"（必要なときに）に
    ・説明文の変更 … desc を書き換え
    ========================================================= */
 
@@ -209,37 +209,35 @@ const LAST_UPDATED = "2026年10月";
 const ANDROID_OPEN_MODE = "https";
 
 const CATEGORIES = [
-  { id:"must",     tab:"必須",           title:"必須アプリ",           note:"入職日までに全員準備してください" },
-  { id:"asneeded", tab:"必要なときに",   title:"必要なときに使うもの", note:"使う場面が来てからでもOKです" },
-  { id:"benefit",  tab:"福利厚生・手続き", title:"福利厚生・手続き",   note:"制度の利用や手続きのときに使います" }
+  { id:"must",     tab:"必須",         title:"必須アプリ",           note:"入職日までに全員準備してください" },
+  { id:"asneeded", tab:"必要なときに", title:"必要なときに使うもの", note:"使う場面が来てからでもOKです" }
 ];
 
 const APPS = [
   // ---- 必須 ----
-  { id:"ibow", name:"iBow", cat:"must", label:"iB", color:"#3a7bd5",
-    desc:"訪問看護の電子カルテ。訪問記録や計画書・報告書の入力に使います。",
-    web:"https://login.ibowservice.jp/",
-    note:"毎日使うので、開いたページを「ホーム画面に追加」しておくと便利です。" },
-  { id:"carlco", name:"CAR-LCO", cat:"must", label:"CL", color:"#2f9e8f",
-    desc:"社用車の運転に関する記録（アルコールチェック等）に使うシステムです。",
-    web:"https://www.car-lco.com/WebFront/U_01_Login" },
   { id:"mcs", name:"MCS（MedicalCareStation）", cat:"must", label:"MCS", color:"#1f9bb6",
     desc:"主治医・ケアマネジャーなど多職種と、利用者さんの情報をやりとりする医療介護専用SNSです。",
     ios:"https://apps.apple.com/jp/app/mcs-medicalcarestation/id1201622229", pkg:"jp.co.embrace.MedicalCareStation" },
   { id:"gdrive", name:"Google Drive", cat:"must", label:"Dr", color:"#e0a03a",
     desc:"事業所の共有ファイル（マニュアル・様式など）を見るときに使います。",
     ios:"https://apps.apple.com/app/id507874739", pkg:"com.google.android.apps.docs" },
-  { id:"gdocs", name:"Googleドキュメント", cat:"must", label:"Doc", color:"#4a8ae0",
-    desc:"共有された文書を開いたり、編集したりするときに使います。",
-    ios:"https://apps.apple.com/jp/app/google-%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/id842842640", pkg:"com.google.android.apps.docs.editors.docs" },
   { id:"gchat", name:"Google Chat", cat:"must", label:"GC", color:"#34a26a",
     desc:"Googleアカウントでのチャット連絡に使います。",
     ios:"https://apps.apple.com/jp/app/google-chat/id1163852619", pkg:"com.google.android.apps.dynamite" },
-  { id:"printutil", name:"Print Utility V3", cat:"must", label:"PU", color:"#4f7cac",
-    desc:"事業所の複合機（富士フイルム）へ、スマホから印刷するときに使います。",
-    ios:"https://apps.apple.com/app/id1551923306", pkg:"com.fujifilm.fb.prt.PrintUtility" },
+  { id:"notebooklm", name:"NotebookLM", cat:"must", label:"NB", color:"#5a6470",
+    desc:"資料をもとに、AIで要約・整理をするときに使います。",
+    ios:"https://apps.apple.com/app/id6737527615", pkg:"com.google.android.apps.labs.language.tailwind" },
 
   // ---- 必要なときに ----
+  { id:"myna", name:"マイナアプリ", cat:"asneeded", label:"マイナ", color:"#6a7fc1",
+    desc:"利用者さんのマイナンバーカードを読み取るときに使います（デジタル庁の公式アプリ）。",
+    ios:"https://apps.apple.com/app/id1476359069", pkg:"jp.go.cas.mpa" },
+  { id:"printutil", name:"Print Utility V3", cat:"asneeded", label:"PU", color:"#4f7cac",
+    desc:"事業所の複合機（富士フイルム）へ、スマホから印刷するときに使います。",
+    ios:"https://apps.apple.com/app/id1551923306", pkg:"com.fujifilm.fb.prt.PrintUtility" },
+  { id:"gdocs", name:"Googleドキュメント", cat:"asneeded", label:"Doc", color:"#4a8ae0",
+    desc:"共有された文書を開いたり、編集したりするときに使います。",
+    ios:"https://apps.apple.com/jp/app/google-%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/id842842640", pkg:"com.google.android.apps.docs.editors.docs" },
   { id:"efax", name:"eFax", cat:"asneeded", label:"FAX", color:"#8b6bb8",
     desc:"事業所あてに届いたFAXをスマホで確認するときに使います。",
     ios:"https://apps.apple.com/app/id399922064", pkg:"com.j2.efax" },
@@ -249,9 +247,6 @@ const APPS = [
   { id:"ilovepdf", name:"iLovePDF", cat:"asneeded", label:"PDF", color:"#d65a50",
     desc:"PDFの結合・分割・圧縮などに使います。",
     ios:"https://apps.apple.com/app/id1207332399", pkg:"com.ilovepdf.www" },
-  { id:"notebooklm", name:"NotebookLM", cat:"asneeded", label:"NB", color:"#5a6470",
-    desc:"資料をもとに、AIで要約・整理をするときに使います。",
-    ios:"https://apps.apple.com/app/id6737527615", pkg:"com.google.android.apps.labs.language.tailwind" },
   { id:"mybridge", name:"myBridge", cat:"asneeded", label:"名刺", color:"#2bb3a3",
     desc:"いただいた名刺をスマホで撮影して管理するアプリです。",
     ios:"https://apps.apple.com/jp/app/id1375392167", pkg:"com.linecorp.mybridge" },
@@ -260,15 +255,7 @@ const APPS = [
     ios:"https://apps.apple.com/app/id443904275", pkg:"jp.naver.line.android" },
   { id:"chatwork", name:"Chatwork", cat:"asneeded", label:"CW", color:"#cf6a4c",
     desc:"Chatworkを使っている関係機関とやりとりする場合に使います。",
-    ios:"https://apps.apple.com/jp/app/chatwork/id463672966", pkg:"jp.ecstudio.chatworkandroid" },
-
-  // ---- 福利厚生・手続き ----
-  { id:"hagone", name:"はぐONE（資産形成支援システム）", cat:"benefit", label:"はぐ", color:"#e08a4f",
-    desc:"資産形成支援制度の内容確認や手続きに使います。",
-    ios:"https://apps.apple.com/jp/app/id6745810771", pkg:"li.yapp.app0415FF06" },
-  { id:"myna", name:"マイナアプリ", cat:"benefit", label:"マイナ", color:"#6a7fc1",
-    desc:"マイナンバーカードを使った手続きで使います（デジタル庁の公式アプリ）。",
-    ios:"https://apps.apple.com/app/id1476359069", pkg:"jp.go.cas.mpa" }
+    ios:"https://apps.apple.com/jp/app/chatwork/id463672966", pkg:"jp.ecstudio.chatworkandroid" }
 ];
 
 /* ▲ 編集はここまで ▲ ======================================= */
