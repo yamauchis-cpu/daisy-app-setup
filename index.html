@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#3f8f6b">
+<meta name="color-scheme" content="light">
+<title>業務アプリセットアップ｜訪問看護ステーション デイジー</title>
+<link rel="icon" id="favicon" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f8f4; --surface:#ffffff; --ink:#24332c; --ink2:#5f7269; --line:#dfeae3;
+    --green:#3f8f6b; --green-d:#2d6e51; --green-l:#e7f3ec; --yellow:#f2c94c; --done:#f1f8f3;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.7; font-size:15px;
+  }
+  button{font-family:inherit}
+  .hero{
+    background:linear-gradient(160deg,#55a47e 0%,#2d6e51 100%);
+    color:#fff; padding:26px 16px 70px; border-radius:0 0 28px 28px;
+  }
+  .hero-in,.wrap{max-width:560px; margin:0 auto}
+  .wrap{padding:0 16px 48px}
+  .brand{display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:.03em}
+  .brand svg{width:38px; height:38px; flex:none}
+  h1{font-size:25px; margin:16px 0 6px; letter-spacing:.05em; line-height:1.4}
+  .lead{font-size:14px; margin:0; opacity:.95}
+  .device{
+    display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    padding:3px 12px; border-radius:999px; font-size:12px;
+  }
+  .device i{width:8px; height:8px; border-radius:50%; background:var(--yellow); display:inline-block}
+
+  .progress-card{
+    background:var(--surface); border-radius:var(--radius);
+    box-shadow:0 8px 24px rgba(45,110,81,.13); padding:18px 18px 16px;
+    margin-top:-48px; position:relative;
+  }
+  .progress-top{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+  .progress-top b{font-size:15px}
+  .progress-num{font-size:26px; font-weight:700; color:var(--green-d)}
+  .progress-num small{font-size:14px; color:var(--ink2); font-weight:500}
+  .bar{height:10px; background:var(--green-l); border-radius:999px; overflow:hidden; margin:8px 0 6px}
+  .bar span{display:block; height:100%; width:0; background:linear-gradient(90deg,#7cc29e,var(--green)); border-radius:999px; transition:width .4s}
+  .progress-sub{font-size:12px; color:var(--ink2); margin:0}
+  .progress-card.complete .progress-num{color:#c8961b}
+
+  details.howto{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    margin-top:14px; padding:4px 16px;
+  }
+  details.howto summary{cursor:pointer; font-weight:700; padding:10px 0; list-style:none; display:flex; justify-content:space-between}
+  details.howto summary::-webkit-details-marker{display:none}
+  details.howto summary::after{content:"＋"; color:var(--green)}
+  details.howto[open] summary::after{content:"－"}
+  .howto ol{margin:0 0 12px; padding-left:1.3em; font-size:14px}
+  .howto li{margin-bottom:6px}
+  .howto .tip{font-size:12.5px; background:var(--green-l); border-radius:12px; padding:10px 12px; margin:0 0 14px; color:var(--green-d)}
+
+  .tabs{
+    position:sticky; top:0; z-index:5; background:var(--bg);
+    display:flex; gap:8px; overflow-x:auto; padding:14px 0 10px; margin-top:6px;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:none; border:1px solid var(--line); background:var(--surface); color:var(--ink2);
+    padding:7px 14px; border-radius:999px; font-size:13.5px; cursor:pointer;
+  }
+  .tab[aria-selected="true"]{background:var(--green); border-color:var(--green); color:#fff; font-weight:700}
+
+  .section{margin-top:12px}
+  .section-head{display:flex; align-items:baseline; gap:8px; margin:12px 2px 8px; flex-wrap:wrap}
+  .section-head h2{font-size:17px; margin:0}
+  .section-head p{margin:0; font-size:12px; color:var(--ink2)}
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:14px; margin-bottom:12px; transition:background .25s,border-color .25s;
+  }
+  .card.done{background:var(--done); border-color:#bfdccb}
+  .card-main{display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:start}
+  .icon{
+    width:52px; height:52px; border-radius:14px; background:var(--c);
+    color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center;
+    font-family:"Hiragino Sans","Noto Sans JP",sans-serif; letter-spacing:.02em; position:relative;
+  }
+  .icon .ok{
+    position:absolute; right:-5px; bottom:-5px; width:22px; height:22px; border-radius:50%;
+    background:var(--yellow); color:var(--ink); font-size:13px; display:none;
+    align-items:center; justify-content:center; border:2px solid #fff;
+  }
+  .card.done .icon .ok{display:flex}
+  .info h3{font-size:16px; margin:0; line-height:1.4}
+  .info p{font-size:13px; color:var(--ink2); margin:4px 0 0}
+  .kind{display:inline-block; font-size:11px; padding:1px 8px; border-radius:6px; margin-top:6px; background:var(--green-l); color:var(--green-d)}
+  .kind.web{background:#eef0fa; color:#4a5aa8}
+  .note{font-size:12px; color:#8a6d1c; background:#fdf6e1; border-radius:10px; padding:6px 10px; margin-top:8px}
+  .actions{display:flex; gap:10px; margin-top:12px; align-items:stretch}
+  .btn{
+    flex:1; border:none; background:var(--green); color:#fff; font-size:14.5px; font-weight:700;
+    border-radius:12px; padding:11px 10px; cursor:pointer; box-shadow:0 2px 0 var(--green-d);
+  }
+  .btn:active{transform:translateY(1px); box-shadow:none}
+  .card.done .btn{background:#fff; color:var(--green-d); border:1px solid #bfdccb; box-shadow:none}
+  .check{
+    flex:none; display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink2);
+    border:1px solid var(--line); border-radius:12px; padding:0 12px; background:#fff; cursor:pointer; user-select:none;
+  }
+  .check input{width:18px; height:18px; accent-color:var(--green); margin:0}
+
+  footer{margin-top:28px; text-align:center; font-size:12.5px; color:var(--ink2)}
+  footer .help{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px; text-align:left; margin-bottom:16px}
+  footer .help b{color:var(--ink)}
+  .reset{background:none; border:none; color:var(--ink2); text-decoration:underline; font-size:12px; cursor:pointer; margin-top:6px}
+
+  .modal-bg{position:fixed; inset:0; background:rgba(20,40,30,.45); display:none; align-items:flex-end; justify-content:center; z-index:20; padding:16px}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff; border-radius:20px; width:100%; max-width:420px; padding:20px; margin-bottom:env(safe-area-inset-bottom)}
+  .modal h3{margin:0 0 4px; font-size:17px}
+  .modal p{margin:0 0 14px; font-size:13px; color:var(--ink2)}
+  .modal a{display:block; text-align:center; text-decoration:none; background:var(--green); color:#fff; font-weight:700; padding:11px; border-radius:12px; margin-bottom:10px}
+  .modal a.sub{background:#fff; color:var(--green-d); border:1px solid #bfdccb}
+  .modal .close{width:100%; background:none; border:none; color:var(--ink2); padding:8px; cursor:pointer; font-size:14px}
+  @media (min-width:600px){ .modal-bg{align-items:center} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true" id="logo"></svg>
+      <span>訪問看護ステーション デイジー</span>
+    </div>
+    <h1>業務アプリ セットアップ</h1>
+    <p class="lead">入職おめでとうございます。お仕事で使うアプリを、このページからまとめて準備できます。</p>
+    <span class="device"><i></i><span id="deviceText">端末を確認しています…</span></span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="progress-card" id="progressCard" aria-live="polite">
+    <div class="progress-top">
+      <b>必須アプリの準備</b>
+      <span class="progress-num" id="mustNum">0<small> / 0</small></span>
+    </div>
+    <div class="bar"><span id="mustBar"></span></div>
+    <p class="progress-sub" id="allText">全体 0 / 0 完了</p>
+  </section>
+
+  <details class="howto">
+    <summary>使い方（はじめての方へ）</summary>
+    <ol>
+      <li>アプリごとの緑のボタンを押します。</li>
+      <li>iPhoneはApp Store、AndroidはGoogle Playが開くので「入手」「インストール」を押します。（すでに入っている場合は「開く」と表示されます）</li>
+      <li>インストールできたら、このページに戻って「済」にチェックを入れます。</li>
+    </ol>
+    <p class="tip">ストアが開かないときは、画面右上のメニューから「ブラウザで開く（Safari / Chrome）」を選んでから、もう一度ボタンを押してください。チェックの記録はこの端末だけに保存されます。</p>
+  </details>
+
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <div id="list"></div>
+
+  <footer>
+    <div class="help">
+      <b>困ったときは</b><br>
+      インストールやログインがうまくいかないときは、管理者または事務員に声をかけてください。IDやパスワードは別途お知らせします。
+    </div>
+    <div>訪問看護ステーション デイジー｜<span id="updated"></span> 更新</div>
+    <button class="reset" id="reset" type="button">チェックをすべて外す</button>
+  </footer>
+</main>
+
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal">
+    <h3 id="mTitle"></h3>
+    <p>スマートフォンのLINE WORKSから開くと、端末に合わせて自動でストアが開きます。パソコンからは下のボタンでストアのページを確認できます。</p>
+    <a id="mIos" target="_blank" rel="noopener">App Store（iPhone）</a>
+    <a id="mAnd" class="sub" target="_blank" rel="noopener">Google Play（Android）</a>
+    <button class="close" id="mClose" type="button">閉じる</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   ▼ 管理者が編集するのはここだけです ▼
+   ・アプリの追加/削除 … APPS に1行（1ブロック）追加・削除
+   ・カテゴリの変更 … 各アプリの cat を "must" / "asneeded" / "benefit" に
+   ・説明文の変更 … desc を書き換え
+   ========================================================= */
+
+const LAST_UPDATED = "2026年10月";
+
+/* Androidの開き方
+   "https"  … 通常のGoogle Playリンク（まずはこちら）
+   "intent" … LINE WORKS内でPlayストアのアプリが開かない場合に切り替え */
+const ANDROID_OPEN_MODE = "https";
+
+const CATEGORIES = [
+  { id:"must",     tab:"必須",           title:"必須アプリ",           note:"入職日までに全員準備してください" },
+  { id:"asneeded", tab:"必要なときに",   title:"必要なときに使うもの", note:"使う場面が来てからでもOKです" },
+  { id:"benefit",  tab:"福利厚生・手続き", title:"福利厚生・手続き",   note:"制度の利用や手続きのときに使います" }
+];
+
+const APPS = [
+  // ---- 必須 ----
+  { id:"ibow", name:"iBow", cat:"must", label:"iB", color:"#3a7bd5",
+    desc:"訪問看護の電子カルテ。訪問記録や計画書・報告書の入力に使います。",
+    web:"https://login.ibowservice.jp/",
+    note:"毎日使うので、開いたページを「ホーム画面に追加」しておくと便利です。" },
+  { id:"carlco", name:"CAR-LCO", cat:"must", label:"CL", color:"#2f9e8f",
+    desc:"社用車の運転に関する記録（アルコールチェック等）に使うシステムです。",
+    web:"https://www.car-lco.com/WebFront/U_01_Login" },
+  { id:"mcs", name:"MCS（MedicalCareStation）", cat:"must", label:"MCS", color:"#1f9bb6",
+    desc:"主治医・ケアマネジャーなど多職種と、利用者さんの情報をやりとりする医療介護専用SNSです。",
+    ios:"https://apps.apple.com/jp/app/mcs-medicalcarestation/id1201622229", pkg:"jp.co.embrace.MedicalCareStation" },
+  { id:"gdrive", name:"Google Drive", cat:"must", label:"Dr", color:"#e0a03a",
+    desc:"事業所の共有ファイル（マニュアル・様式など）を見るときに使います。",
+    ios:"https://apps.apple.com/app/id507874739", pkg:"com.google.android.apps.docs" },
+  { id:"gdocs", name:"Googleドキュメント", cat:"must", label:"Doc", color:"#4a8ae0",
+    desc:"共有された文書を開いたり、編集したりするときに使います。",
+    ios:"https://apps.apple.com/jp/app/google-%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/id842842640", pkg:"com.google.android.apps.docs.editors.docs" },
+  { id:"gchat", name:"Google Chat", cat:"must", label:"GC", color:"#34a26a",
+    desc:"Googleアカウントでのチャット連絡に使います。",
+    ios:"https://apps.apple.com/jp/app/google-chat/id1163852619", pkg:"com.google.android.apps.dynamite" },
+  { id:"printutil", name:"Print Utility V3", cat:"must", label:"PU", color:"#4f7cac",
+    desc:"事業所の複合機（富士フイルム）へ、スマホから印刷するときに使います。",
+    ios:"https://apps.apple.com/app/id1551923306", pkg:"com.fujifilm.fb.prt.PrintUtility" },
+
+  // ---- 必要なときに ----
+  { id:"efax", name:"eFax", cat:"asneeded", label:"FAX", color:"#8b6bb8",
+    desc:"事業所あてに届いたFAXをスマホで確認するときに使います。",
+    ios:"https://apps.apple.com/app/id399922064", pkg:"com.j2.efax" },
+  { id:"canon", name:"Canon PRINT", cat:"asneeded", label:"CP", color:"#c0504d",
+    desc:"キヤノン製プリンターへ、スマホから印刷するときに使います。",
+    ios:"https://apps.apple.com/jp/app/canon-print/id664425773", pkg:"jp.co.canon.bsd.ad.pixmaprint" },
+  { id:"ilovepdf", name:"iLovePDF", cat:"asneeded", label:"PDF", color:"#d65a50",
+    desc:"PDFの結合・分割・圧縮などに使います。",
+    ios:"https://apps.apple.com/app/id1207332399", pkg:"com.ilovepdf.www" },
+  { id:"notebooklm", name:"NotebookLM", cat:"asneeded", label:"NB", color:"#5a6470",
+    desc:"資料をもとに、AIで要約・整理をするときに使います。",
+    ios:"https://apps.apple.com/app/id6737527615", pkg:"com.google.android.apps.labs.language.tailwind" },
+  { id:"mybridge", name:"myBridge", cat:"asneeded", label:"名刺", color:"#2bb3a3",
+    desc:"いただいた名刺をスマホで撮影して管理するアプリです。",
+    ios:"https://apps.apple.com/jp/app/id1375392167", pkg:"com.linecorp.mybridge" },
+  { id:"line", name:"LINE", cat:"asneeded", label:"LINE", color:"#3fae5a",
+    desc:"関係機関など、LINEでの連絡が必要な場合に使います。",
+    ios:"https://apps.apple.com/app/id443904275", pkg:"jp.naver.line.android" },
+  { id:"chatwork", name:"Chatwork", cat:"asneeded", label:"CW", color:"#cf6a4c",
+    desc:"Chatworkを使っている関係機関とやりとりする場合に使います。",
+    ios:"https://apps.apple.com/jp/app/chatwork/id463672966", pkg:"jp.ecstudio.chatworkandroid" },
+
+  // ---- 福利厚生・手続き ----
+  { id:"hagone", name:"はぐONE（資産形成支援システム）", cat:"benefit", label:"はぐ", color:"#e08a4f",
+    desc:"資産形成支援制度の内容確認や手続きに使います。",
+    ios:"https://apps.apple.com/jp/app/id6745810771", pkg:"li.yapp.app0415FF06" },
+  { id:"myna", name:"マイナアプリ", cat:"benefit", label:"マイナ", color:"#6a7fc1",
+    desc:"マイナンバーカードを使った手続きで使います（デジタル庁の公式アプリ）。",
+    ios:"https://apps.apple.com/app/id1476359069", pkg:"jp.go.cas.mpa" }
+];
+
+/* ▲ 編集はここまで ▲ ======================================= */
+
+const STORE_KEY = "daisy-app-setup-checks-v1";
+
+function loadChecks(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
+function saveChecks(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(checks)); }catch(e){} }
+let checks = loadChecks();
+
+function detectOS(){
+  const ua = navigator.userAgent || "";
+  if (/android/i.test(ua)) return "android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "ios";
+  if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return "ios"; // iPadOS
+  return "other";
+}
+const OS = detectOS();
+
+function playHttps(pkg){ return "https://play.google.com/store/apps/details?id=" + pkg; }
+function androidUrl(pkg){
+  const https = playHttps(pkg);
+  if (ANDROID_OPEN_MODE === "intent"){
+    return "intent://details?id=" + pkg + "#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=" + encodeURIComponent(https) + ";end";
+  }
+  return https;
+}
+
+function buttonLabel(app){
+  if (app.web) return "ログインページを開く";
+  if (OS === "ios") return "App Storeでインストール";
+  if (OS === "android") return "Google Playでインストール";
+  return "ストアのリンクを見る";
+}
+
+function openApp(app){
+  if (app.web){
+    if (OS === "other") window.open(app.web, "_blank", "noopener");
+    else location.href = app.web;
+    return;
+  }
+  if (OS === "ios") location.href = app.ios;
+  else if (OS === "android") location.href = androidUrl(app.pkg);
+  else showModal(app);
+}
+
+/* ---------- 描画 ---------- */
+const DAISY_SVG =
+  '<circle cx="32" cy="32" r="32" fill="#ffffff" fill-opacity=".22"/>' +
+  '<g fill="#ffffff">' +
+  [0,40,80,120,160,200,240,280,320].map(function(r){
+    return '<ellipse cx="32" cy="17.5" rx="5.2" ry="10" transform="rotate(' + r + ' 32 32)"/>';
+  }).join("") +
+  '</g><circle cx="32" cy="32" r="8" fill="#f2c94c"/>';
+
+document.getElementById("logo").innerHTML = DAISY_SVG;
+document.getElementById("favicon").href = "data:image/svg+xml," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">' +
+  DAISY_SVG.replace('fill="#ffffff" fill-opacity=".22"', 'fill="#3f8f6b"') + '</svg>');
+document.getElementById("updated").textContent = LAST_UPDATED;
+document.getElementById("deviceText").textContent =
+  OS === "ios" ? "iPhone / iPad 用のストアが開きます" :
+  OS === "android" ? "Android 用のストアが開きます" :
+  "パソコンで表示中（スマホで開くと自動で振り分けます）";
+
+let currentTab = "all";
+
+function iconFontSize(label){ return label.length <= 2 ? 18 : label.length === 3 ? 14 : 12; }
+
+function cardHTML(app){
+  const done = !!checks[app.id];
+  return '' +
+  '<article class="card' + (done ? ' done' : '') + '" id="card-' + app.id + '">' +
+    '<div class="card-main">' +
+      '<div class="icon" style="--c:' + app.color + ';font-size:' + iconFontSize(app.label) + 'px" aria-hidden="true">' +
+        app.label + '<span class="ok">✓</span></div>' +
+      '<div class="info">' +
+        '<h3>' + app.name + '</h3>' +
+        '<p>' + app.desc + '</p>' +
+        (app.web ? '<span class="kind web">Webでログイン</span>' : '<span class="kind">アプリ</span>') +
+        (app.note ? '<div class="note">' + app.note + '</div>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div class="actions">' +
+      '<button class="btn" type="button" data-open="' + app.id + '">' + buttonLabel(app) + '</button>' +
+      '<label class="check"><input type="checkbox" data-check="' + app.id + '"' + (done ? ' checked' : '') + '>済</label>' +
+    '</div>' +
+  '</article>';
+}
+
+function renderTabs(){
+  const tabs = [{ id:"all", tab:"すべて" }].concat(CATEGORIES);
+  document.getElementById("tabs").innerHTML = tabs.map(function(t){
+    return '<button class="tab" role="tab" type="button" data-tab="' + t.id + '" aria-selected="' + (t.id === currentTab) + '">' + t.tab + '</button>';
+  }).join("");
+}
+
+function renderList(){
+  const cats = currentTab === "all" ? CATEGORIES : CATEGORIES.filter(function(c){ return c.id === currentTab; });
+  document.getElementById("list").innerHTML = cats.map(function(c){
+    const apps = APPS.filter(function(a){ return a.cat === c.id; });
+    if (!apps.length) return "";
+    const n = apps.filter(function(a){ return checks[a.id]; }).length;
+    return '<section class="section">' +
+      '<div class="section-head"><h2>' + c.title + '（' + n + '/' + apps.length + '）</h2><p>' + c.note + '</p></div>' +
+      apps.map(cardHTML).join("") +
+    '</section>';
+  }).join("");
+}
+
+function renderProgress(){
+  const must = APPS.filter(function(a){ return a.cat === "must"; });
+  const mustDone = must.filter(function(a){ return checks[a.id]; }).length;
+  const allDone = APPS.filter(function(a){ return checks[a.id]; }).length;
+  document.getElementById("mustNum").innerHTML = mustDone + '<small> / ' + must.length + '</small>';
+  document.getElementById("mustBar").style.width = (must.length ? mustDone / must.length * 100 : 0) + "%";
+  document.getElementById("allText").textContent =
+    (mustDone === must.length && must.length ? "必須アプリの準備が完了しました。おつかれさまでした！　" : "") +
+    "全体 " + allDone + " / " + APPS.length + " 完了";
+  document.getElementById("progressCard").classList.toggle("complete", mustDone === must.length && must.length > 0);
+}
+
+function renderAll(){ renderTabs(); renderList(); renderProgress(); }
+
+/* ---------- 操作 ---------- */
+document.addEventListener("click", function(e){
+  const t = e.target.closest("[data-tab]");
+  if (t){ currentTab = t.dataset.tab; renderTabs(); renderList(); return; }
+  const o = e.target.closest("[data-open]");
+  if (o){ const app = APPS.find(function(a){ return a.id === o.dataset.open; }); if (app) openApp(app); }
+});
+
+document.addEventListener("change", function(e){
+  const c = e.target.closest("[data-check]");
+  if (!c) return;
+  if (c.checked) checks[c.dataset.check] = true; else delete checks[c.dataset.check];
+  saveChecks(); renderList(); renderProgress();
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+  if (confirm("チェックをすべて外しますか？")){ checks = {}; saveChecks(); renderAll(); }
+});
+
+/* ---------- PC用モーダル ---------- */
+const modal = document.getElementById("modal");
+function showModal(app){
+  document.getElementById("mTitle").textContent = app.name;
+  document.getElementById("mIos").href = app.ios;
+  document.getElementById("mAnd").href = playHttps(app.pkg);
+  modal.classList.add("open");
+}
+document.getElementById("mClose").addEventListener("click", function(){ modal.classList.remove("open"); });
+modal.addEventListener("click", function(e){ if (e.target === modal) modal.classList.remove("open"); });
+
+renderAll();
+</script>
+</body>
+</html>
